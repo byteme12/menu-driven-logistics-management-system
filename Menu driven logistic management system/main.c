@@ -347,3 +347,28 @@ double findDistance(int src, int dest)
 {
     return distanceMatrix[src-1][dest-1];
 }
+
+void calculateCost(Delivery *d)
+{
+    Vehicle v = vehicles[d->vehicleType];
+    double D = d->distance;
+    double W = d->weight;
+    double R = v.ratePerKm;
+    double S = v.speed;
+    double E = v.efficiency;
+
+    d->cost = D * R * (1 + (W / 10000.0));
+    d->time = D / S;
+    d->fuelUsed = D / E;
+    double fuelCost = d->fuelUsed * FUEL_PRICE;
+    double totalCost = d->cost + fuelCost;
+    double profit = d->cost * 0.25;
+    d->totalCost = totalCost;
+    d->profit = profit;
+    d->charge = totalCost + profit;
+}
+
+
+
+
+
