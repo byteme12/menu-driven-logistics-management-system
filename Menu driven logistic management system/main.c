@@ -4,7 +4,8 @@
 #include <math.h>
 
 #define MAX_CITIES 30
-
+#define MAX_DELIVERIES 50
+#define FUEL_PRICE 310.0
 
 void addCity();
 void renameCity();
@@ -13,7 +14,14 @@ void displayCities();
 void cityMenu();
 void distanceMenu();
 void reportMenu();
+void editDistance();
+void displayDistanceTable();
 
+
+
+char cities[MAX_CITIES][50];
+int distanceMatrix[MAX_CITIES][MAX_CITIES];
+int cityCount = 0;
 
 
 int main()
@@ -152,5 +160,48 @@ void displayCities()
     for (int i = 0; i < cityCount; i++)
     {
         printf("%d. %s\n", i+1, cities[i]);
+    }
+}
+
+
+
+void editDistance()
+{
+    if (cityCount < 2)
+    {
+        printf("At least 2 cities needed.\n");
+        return;
+    }
+    displayCities();
+    int a, b, d;
+    printf("Enter source city index: ");
+    scanf("%d", &a);
+    printf("Enter destination city index: ");
+    scanf("%d", &b);
+    if (a == b)
+    {
+        printf("Cannot set distance from city to itself.\n");
+        return;
+    }
+    printf("Enter distance (km): ");
+    scanf("%d", &d);
+    distanceMatrix[a-1][b-1] = distanceMatrix[b-1][a-1] = d;
+    printf("Distance updated.\n");
+}
+
+void displayDistanceTable()
+{
+    printf("\nDistance Table (km):\n\t");
+    for (int i = 0; i < cityCount; i++)
+        printf("%s\t\t", cities[i]);
+    printf("\n");
+    for (int i = 0; i < cityCount; i++)
+    {
+        printf("%s\t", cities[i]);
+        for (int j = 0; j < cityCount; j++)
+        {
+            printf("%d\t\t", distanceMatrix[i][j]);
+        }
+        printf("\n");
     }
 }
