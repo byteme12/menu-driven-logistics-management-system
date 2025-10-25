@@ -391,4 +391,33 @@ void showDeliverySummary(Delivery d)
 }
 
 
+void showReports()
+{
+    printf("\n========== PERFORMANCE REPORTS ==========\n");
+    double totalDistance = 0, totalTime = 0, totalRevenue = 0, totalProfit = 0;
+    double longest = 0, shortest = 1e9;
+    for (int i = 0; i < deliveryCount; i++)
+    {
+        totalDistance =totalDistance + deliveries[i].distance;
+        totalTime =totalTime + deliveries[i].time;
+        totalRevenue =totalRevenue + deliveries[i].charge;
+        totalProfit =totalProfit + deliveries[i].profit;
+        if (deliveries[i].distance > longest)
+            longest = deliveries[i].distance;
+
+        if (deliveries[i].distance < shortest)
+            shortest = deliveries[i].distance;
+    }
+    printf("Total Deliveries: %d\n", deliveryCount);
+    printf("Total Distance Covered: %.2f km\n", totalDistance);
+
+    if (deliveryCount > 0)
+        printf("Average Delivery Time: %.2f h\n", totalTime / deliveryCount);
+
+    printf("Total Revenue: %.2f LKR\nTotal Profit: %.2f LKR\n", totalRevenue, totalProfit);
+    printf("Longest Route: %.2f km\nShortest Route: %.2f km\n", longest, shortest);
+    printf("==========================================\n");
+}
+
+
 
