@@ -154,6 +154,31 @@ void removeCity()
     printf("City removed.\n");
 }
 
+void distanceMenu()
+{
+    int choice;
+    while (1)
+    {
+        printf("\n---- Distance Management ----\n");
+        printf("1. Edit Distance\n2. Display Distance Table\n0. Back\nChoice: ");
+        scanf("%d", &choice);
+        switch (choice)
+        {
+        case 1:
+            editDistance();
+            break;
+        case 2:
+            displayDistanceTable();
+            break;
+        case 0:
+            return;
+        default:
+            printf("Invalid!\n");
+        }
+    }
+}
+
+
 void displayCities()
 {
     printf("\nCities:\n");
