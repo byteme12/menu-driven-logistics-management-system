@@ -1,3 +1,5 @@
+
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -7,20 +9,6 @@
 #define MAX_DELIVERIES 50
 #define FUEL_PRICE 310.0
 
-void addCity();
-void renameCity();
-void removeCity();
-void displayCities();
-void cityMenu();
-void distanceMenu();
-void reportMenu();
-void editDistance();
-void displayDistanceTable();
-void newDelivery();
-double findDistance(int src, int dest);
-void calculateCost(Delivery *d);
-void showDeliverySummary(Delivery d);
-void showReports();
 
 typedef struct
 {
@@ -38,7 +26,6 @@ typedef struct
     double weight, distance, cost, fuelUsed, totalCost, profit, charge, time;
 } Delivery;
 
-
 char cities[MAX_CITIES][50];
 int distanceMatrix[MAX_CITIES][MAX_CITIES];
 int cityCount = 0;
@@ -53,22 +40,35 @@ Vehicle vehicles[3] =
     {"Lorry", 10000, 80, 45, 4}
 };
 
-Delivery deliveries[MAX_DELIVERIES];
-int deliveryCount = 0;
 
+void cityMenu();
+void distanceMenu();
+void deliveryMenu();
+void reportMenu();
+void addCity();
+void renameCity();
+void removeCity();
+void displayCities();
+void editDistance();
+void displayDistanceTable();
+void newDelivery();
+double findDistance(int src, int dest);
+void calculateCost(Delivery *d);
+void showDeliverySummary(Delivery d);
+void showReports();
 
 int main()
 {
     int choice;
     while (1)
     {
-        printf("\n========== LOGISTICS MANAGEMENT SYSTEM ==========\n");
+        printf("\n========== LOGISTICS MANAGEMENT SYSTEM ==========\n\n");
         printf("1. City Management\n");
         printf("2. Distance Management\n");
         printf("3. New Delivery\n");
         printf("4. Reports\n");
         printf("0. Exit\n");
-        printf("Enter choice: ");
+        printf("\nEnter choice: ");
         scanf("%d", &choice);
         switch (choice)
         {
@@ -85,18 +85,16 @@ int main()
             reportMenu();
             break;
         case 0:
-            printf("Exiting program...\n");
+            printf("Exiting...\n");
             return 0;
         default:
-            printf("Invalid choice!\n");
+            printf("Invalid choice!!\n");
         }
     }
     return 0;
-
-
-
-    return 0;
 }
+
+
 
 void cityMenu()
 {
@@ -104,14 +102,13 @@ void cityMenu()
     while (1)
     {
         printf("\n---- City Management ----\n");
-        printf("1. Add City\n);");
-        printf("2. Rename City\n");
-        printf("3. Remove City\n");
-        printf("4. Display Cities\n");
-        printf("0. Back\n");
-        printf("Choice: ");
+        printf("01. Add City\n ");
+        printf("02.Rename City\n");
+        printf("03.Remove City\n");
+        printf("04.Display Cities\n");
+        printf("0 .Back\n");
+        printf("\nEnter your choice:");
         scanf("%d", &choice);
-
         switch (choice)
         {
         case 1:
@@ -129,7 +126,7 @@ void cityMenu()
         case 0:
             return;
         default:
-            printf("Invalid!\n");
+            printf("Invalid choice!!\n");
         }
     }
 }
@@ -138,7 +135,7 @@ void addCity()
 {
     if (cityCount >= MAX_CITIES)
     {
-        printf("City limit reached.\n");
+        printf("Maximum cities added.\n");
         return;
     }
     printf("Enter city name: ");
@@ -153,12 +150,12 @@ void renameCity()
     int index;
     printf("Enter city index to rename: ");
     scanf("%d", &index);
-    if (index < 0 || index >= cityCount)
+    if (index < 0  ||index >= cityCount)
     {
         printf("Invalid index.\n");
         return;
     }
-    printf("Enter new name: ");
+    printf("Enter new city name: ");
     scanf("%s", cities[index-1]);
     printf("City renamed.\n");
 }
@@ -169,7 +166,7 @@ void removeCity()
     int index;
     printf("Enter city index to remove: ");
     scanf("%d", &index);
-    if (index < 0 || index >=cityCount)
+    if (index < 0 || index >= cityCount)
     {
         printf("Invalid index.\n");
         return;
@@ -187,16 +184,28 @@ void removeCity()
     printf("City removed.\n");
 }
 
+void displayCities()
+{
+    printf("\nCities:\n");
+    for (int i = 0; i < cityCount; i++)
+    {
+        printf("%d. %s\n", i+1, cities[i]);
+    }
+}
+
+
+
+
 void distanceMenu()
 {
     int choice;
     while (1)
     {
-        printf("\n---- Distance Management ----\n");
-        printf("1. Edit Distance:\n ");
-        printf("2. Display Distance Table:\n");
-        printf("0. Back:\n");
-        printf("Choice:");
+        printf("\n---- Distance Management ----\n\n");
+        printf("1. Edit Distance\n");
+        printf("2.Display Distance Table\n");
+        printf("0.Back\n");
+        printf("\nEnter your Choice:");
         scanf("%d", &choice);
         switch (choice)
         {
@@ -213,18 +222,6 @@ void distanceMenu()
         }
     }
 }
-
-
-void displayCities()
-{
-    printf("\nCities:\n");
-    for (int i = 0; i < cityCount; i++)
-    {
-        printf("%d. %s\n", i+1, cities[i]);
-    }
-}
-
-
 
 void editDistance()
 {
@@ -273,10 +270,11 @@ void deliveryMenu()
     int choice;
     while (1)
     {
-        printf("\n---- Delivery Menu ----\n");
-        printf("1. New Delivery Request\n ");
+        printf("\n\n---- Delivery Menu ----\n");
+        printf("1. New Delivery Request\n");
         printf("0. Back\n");
-        printf("Choice:\n");
+        printf("\nEnter your choice:");
+
         scanf("%d", &choice);
         switch (choice)
         {
@@ -286,7 +284,7 @@ void deliveryMenu()
         case 0:
             return;
         default:
-            printf("Invalid!\n");
+            printf("Invalid choice!\n");
         }
     }
 }
@@ -314,10 +312,7 @@ void newDelivery()
     printf("Enter weight (kg): ");
     scanf("%lf", &weight);
 
-    printf("Select vehicle:\n ");
-    printf("1=Van:\n");
-    printf("2=Truck:\n");
-    printf("3=Lorry:\n");
+    printf("Select vehicle: 1=Van, 2=Truck, 3=Lorry: ");
     scanf("%d", &type);
     if (type < 1 || type > 3)
     {
@@ -332,8 +327,8 @@ void newDelivery()
     }
 
     Delivery d;
-    d.src = src;
-    d.dest = dest;
+    d.src = src-1;
+    d.dest = dest-1;
     d.vehicleType = type - 1;
     d.weight = weight;
     d.distance = findDistance(src, dest);
@@ -391,6 +386,12 @@ void showDeliverySummary(Delivery d)
 }
 
 
+
+void reportMenu()
+{
+    showReports();
+}
+
 void showReports()
 {
     printf("\n========== PERFORMANCE REPORTS ==========\n");
@@ -418,6 +419,3 @@ void showReports()
     printf("Longest Route: %.2f km\nShortest Route: %.2f km\n", longest, shortest);
     printf("==========================================\n");
 }
-
-
-
