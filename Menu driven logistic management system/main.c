@@ -20,7 +20,7 @@ void newDelivery();
 double findDistance(int src, int dest);
 void calculateCost(Delivery *d);
 void showDeliverySummary(Delivery d);
-
+void showReports();
 
 typedef struct
 {
@@ -369,6 +369,26 @@ void calculateCost(Delivery *d)
 }
 
 
+void showDeliverySummary(Delivery d)
+{
+    Vehicle v = vehicles[d.vehicleType];
+    printf("\n=====================================================\n");
+    printf("DELIVERY COST ESTIMATION\n");
+    printf("\n-----------------------------------------------------\n");
+    printf("From: %s\n",cities[d.src]);
+    printf("To: %s\n",cities[d.dest]);
+    printf("Distance: %.2f km\n", d.distance);
+    printf("Vehicle: %s\n", v.name);
+    printf("Weight: %.2f kg\n", d.weight);
+    printf("-----------------------------------------------------\n");
+    printf("Base Cost: %.2f LKR\n", d.cost);
+    printf("Fuel Used: %.2f L\n", d.fuelUsed);
+    printf("Total Operational Cost: %.2f LKR\n", d.totalCost);
+    printf("Profit: %.2f LKR\n", d.profit);
+    printf("Customer Charge: %.2f LKR\n",d.charge);
+    printf("Estimated Time: %.2f hours\n",d.time);
+    printf("=====================================================\n");
+}
 
 
 
