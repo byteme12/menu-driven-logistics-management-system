@@ -102,7 +102,7 @@ void cityMenu()
     while (1)
     {
         printf("\n---- City Management ----\n");
-        printf("01. Add City\n ");
+        printf("01.Add City\n");
         printf("02.Rename City\n");
         printf("03.Remove City\n");
         printf("04.Display Cities\n");
@@ -150,7 +150,7 @@ void renameCity()
     int index;
     printf("Enter city index to rename: ");
     scanf("%d", &index);
-    if (index < 0  ||index >= cityCount)
+    if (index < 0  ||index > cityCount)
     {
         printf("Invalid index.\n");
         return;
@@ -202,7 +202,7 @@ void distanceMenu()
     while (1)
     {
         printf("\n---- Distance Management ----\n\n");
-        printf("1. Edit Distance\n");
+        printf("1.Edit Distance\n");
         printf("2.Display Distance Table\n");
         printf("0.Back\n");
         printf("\nEnter your Choice:");
@@ -258,7 +258,7 @@ void displayDistanceTable()
         printf("%s\t", cities[i]);
         for (int j = 0; j < cityCount; j++)
         {
-            printf("%d\t\t", distanceMatrix[i][j]);
+            printf("%d\t\t\t", distanceMatrix[i][j]);
         }
         printf("\n");
     }
